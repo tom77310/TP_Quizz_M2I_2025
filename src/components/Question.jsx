@@ -1,30 +1,25 @@
 /* eslint-disable react/prop-types */
-import { useEffect, useRef } from "react";
+const Question = ({ question, onAnswer }) => {
+  if (!question) return null;
 
-const fetchQuestions = async (onQuestionsLoaded) => {
-  try {
-    const response = await fetch("https://opentdb.com/api.php?amount=10&type=multiple");
-    if (!response.ok) throw new Error(`Erreur ${response.status}: ${response.statusText}`);
+  const answers = [...question.incorrect_answers, question.correct_answer].sort(
+    () => Math.random() - 0.5
+  );
 
-    const data = await response.json();
-    onQuestionsLoaded(data.results);
-  } catch (error) {
-    console.error("Erreur lors du chargement des questions :", error);
-  }
-};
-
-const Question = ({ onQuestionsLoaded }) => {
-  const hasFetched = useRef(false); // Empêche l'appel multiple
-
-  useEffect(() => {
-    if (!hasFetched.current) {
-      hasFetched.current = true;
-      fetchQuestions(onQuestionsLoaded);
-    }
-  }, [onQuestionsLoaded]);
-
-  return null;
+  return (
+    <div className="text-center">
+      <h2 className="text-xl font-semibold mb-4">{question.question}</h2>
+      {answers.map((answer, index) => (
+        <button
+          key={index}
+          className="mb-2 px-4 py-2 bg-gray-200 rounded-lg hover:bg-gray-400"
+          onClick={() => onAnswer(answer)}
+        >
+          {answer}
+        </button>
+      ))}
+    </div>
+  );
 };
 
 export default Question;
-

@@ -1,24 +1,16 @@
-import styles from './Home.module.css';
-
-function Home() {
-	
+import styles from "./components/Home.module;
+const Home = ({ onStart }) => {
 	return (
-		<>
-			<h1>Prêt à tester tes connaissances ?</h1>
-			<h2>Challenge-toi avec notre super quizz interactif !</h2>
-			<p>
-				10 questions, 4 réponses, un seul champion. Réussiras-tu à
-				atteindre le score parfait ?
-			</p>
-
-			<button className={styles.button} onClick={() => {}}>
-				
-					Clique sur le boutton pour commencer ce bête de quiz !
-				
+		<div className="text-center">
+			<h1 className="text-3xl font-bold">Bienvenue au Quizz !</h1>
+			<button
+				className="mt-4 px-6 py-3 bg-blue-600 text-white rounded-lg"
+				onClick={onStart}
+			>
+				Commencer le Quiz
 			</button>
-
-			
-		</>
+		</div>
 	);
-}
+};
+
 export default Home;

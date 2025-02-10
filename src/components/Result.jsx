@@ -1,18 +1,19 @@
 /* eslint-disable react/prop-types */
 const Result = ({ score, total, onRestart }) => {
 	return (
-		<div className="text-center">
-			<h1 className="text-3xl font-bold">Résultat</h1>
-			<p className="text-xl mt-4">
+		<>
+		<div className="{styles.resultContainer}">
+			<h1 className="{styles.resultTitle}">Résultat</h1>
+			<p className="{styles.scoreText}">
 				Score : {score} / {total}
 			</p>
-			<button
-				className="mt-4 px-6 py-3 bg-blue-600 text-white rounded-lg"
-				onClick={onRestart}
-			>
+			<p className="{styles.feedbackText}"></p>
+				{score <= 4 ? "Oups, tu peux mieux faire" : score <= 7 ? "Pas mal, tu t'en sors bien !" : "Félicitations, tu es un expert !"}
+			<button className="{styles.restartButton}" onClick={onRestart}>
 				Rejouer
 			</button>
 		</div>
+		</>
 	);
 };
 

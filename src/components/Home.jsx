@@ -1,13 +1,17 @@
-import styles from "./components/Home.module;
+/* eslint-disable react/prop-types */
+import styles from "./Home.module.css";
 const Home = ({ onStart }) => {
 	return (
 		<div className="text-center">
-			<h1 className="text-3xl font-bold">Bienvenue au Quizz !</h1>
+			<h1>Prêt à tester tes connaissances ? </h1>
+			<h2 className="sousTitreHome">Challenge-toi avec notre super quizz interactif !</h2>
+			<p><strong>10 questions, 4 réponses, un seul survivant</strong><br />
+			<strong>A la fin il n&apos;en restera qu&apos;un !</strong> <br />
+			Réussiras-tu à atteindre le score parfait ?</p>
 			<button
-				className="mt-4 px-6 py-3 bg-blue-600 text-white rounded-lg"
-				onClick={onStart}
+				onClick={onStart} className={styles.button}
 			>
-				Commencer le Quiz
+				C&apos;est partis !
 			</button>
 		</div>
 	);

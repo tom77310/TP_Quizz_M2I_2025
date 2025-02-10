@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from 'react';
 import Question from './Question';
+import './Quiz.module.css';
 
 const Quiz = ({ questions, currentQuestionIndex, setQuestions, onAnswer }) => {
 	const [loading, setLoading] = useState(true);
@@ -11,7 +12,7 @@ const Quiz = ({ questions, currentQuestionIndex, setQuestions, onAnswer }) => {
 		const signal = controller.signal;
 
 		if (questions.length === 0) {
-			fetch('https://opentdb.com/api.php?amount=10&type=multiple', {
+			fetch('https://opentdb.com/api.php?amount=10&difficulty=easy&type=multiple', {
 				signal,
 			})
 				.then((response) => {
@@ -40,15 +41,20 @@ const Quiz = ({ questions, currentQuestionIndex, setQuestions, onAnswer }) => {
 		return () => controller.abort(); // Annule la requête si le composant est démonté
 	}, []);
 
-	if (loading) return <p>Chargement des questions...</p>;
-	if (error) return <p className="text-red-500">Erreur : {error}</p>;
-	if (!questions.length) return <p>Aucune question trouvée.</p>;
+	if (loading) return <div className="{styles.loading}">Chargement...</div>;
+	if (error) return <div className="{styles.error}">Erreur : {error}</div>;
+	if (!questions.length)
+		return <div className="error">Aucune question trouvée.</div>;
 
 	return (
-		<Question
-			question={questions[currentQuestionIndex]}
-			onAnswer={onAnswer}
-		/>
+		<div className="{styles.quizContainer}">
+			{loading ? <div className="{styles.loading}">Chargement...</div> : null}
+			{error ? <div className="{styles.error}">Erreur: {error}</div> : null}
+			<Question
+				question={questions[currentQuestionIndex]}
+				onAnswer={onAnswer}
+			/>
+		</div>
 	);
 };
 
